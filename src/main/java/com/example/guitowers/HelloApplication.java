@@ -1,25 +1,21 @@
 package com.example.guitowers;
 
 import javafx.application.Application;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.DirectionalLight;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.input.MouseDragEvent;
+import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 
-import static javafx.scene.input.MouseEvent.MOUSE_EXITED;
 import static javafx.scene.input.MouseEvent.MOUSE_RELEASED;
 
 public class HelloApplication extends Application {
@@ -51,17 +47,25 @@ public class HelloApplication extends Application {
 
 
 
-
-
         VBox test2 = new VBox();                            //tower 2
         VBox test = new VBox(smallest, middle, largest);    //tower 1
         VBox test3 = new VBox();                            //tower 3
         test2.setMinSize(200, 150);
         test3.setMinSize(200, 150);
         test.setMinSize(200, 150);
+
+        test2.setMaxSize(200, 200);
+        test3.setMaxSize(200, 200);
+        test.setMaxSize(200, 200);
         test.setAlignment(Pos.BOTTOM_CENTER);
         test2.setAlignment(Pos.BOTTOM_CENTER);
         test3.setAlignment(Pos.BOTTOM_CENTER);
+
+        Border colored = new Border(new BorderStroke(Color.GRAY, BorderStrokeStyle.SOLID, new CornerRadii(5),new BorderWidths(10)));
+
+        test2.setBorder(colored);
+        test3.setBorder(colored);
+        test.setBorder(colored);
 
         Pane winner = new Pane();
         Pane directions = new Pane();
@@ -76,6 +80,7 @@ public class HelloApplication extends Application {
         directions.getChildren().add(dir);
         directions.setLayoutX(450);
         dir.setLayoutY(400);
+        dir.setFill(Color.WHITE);
 
         FlowPane holder = new FlowPane(test, test2, test3,winner,directions);   //holder for all panes
         BackgroundFill backgroundFill =
@@ -211,6 +216,10 @@ public class HelloApplication extends Application {
             }
             if(test3.getChildren().contains(largest) && test3.getChildren().contains(smallest) && test3.getChildren().contains(middle)){
                 winner.getChildren().add(winnerText);
+                Border empty = new Border(new BorderStroke(Color.BLACK,BorderStrokeStyle.SOLID,CornerRadii.EMPTY,new BorderWidths(0)));
+                test2.setBorder(empty);
+                test3.setBorder(empty);
+                test.setBorder(empty);
 
             }
         });
